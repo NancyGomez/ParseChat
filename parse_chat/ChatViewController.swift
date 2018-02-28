@@ -13,11 +13,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.onTimer), userInfo: nil, repeats: true)
     }
     
     @IBAction func onSend(_ sender: Any) {
@@ -29,6 +32,30 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("Problem saving message: \(error.localizedDescription)")
             } else {
                 print("The message was saved!")
+            }
+        }
+    }
+    
+    @objc func onTimer() {
+        print("ONE")
+        getMessages()
+    }
+    
+    func getMessages() {
+        let query = PFQuery(className: "Message")
+        query.includeKey("user")
+        query.order(byDescending: "createdAt")
+        
+        // fetch data asynchronously
+        query.findObjectsInBackground { (messages, error) in
+            if let messages = messages{
+                // do something with the array of object returned by the call
+                for message in messages {
+                    // access the object as a dictionary and cast type
+                    print(message)
+                }
+            } else {
+                print(error?.localizedDescription)
             }
         }
     }
