@@ -35,9 +35,17 @@ class LoginViewController: UIViewController {
     
     @IBAction func onSignUp(_ sender: Any) {
         let newUser = PFUser()
+        
+        // check to make sure fields aren't empty
+        if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
+            self.alertController.message = "Sign up failed: username or password empty."
+            self.present(self.alertController, animated: true) {}
+            return
+        }
+        
         newUser.username = usernameTextField.text
         newUser.password = passwordTextField.text
-        
+    
         newUser.signUpInBackground { (success: Bool, error: Error?) in
             if let error = error {
                 self.alertController.message = "Sign up failed: \(error.localizedDescription)"
