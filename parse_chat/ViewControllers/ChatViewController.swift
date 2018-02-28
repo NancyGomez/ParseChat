@@ -79,7 +79,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let messages = messages{
                 if(messages != nil){
                     self.messages = []
-                    
+                    self.usernames = []
                     for message in messages{
                         // First check if a message exists
                         if message["text"] != nil {
