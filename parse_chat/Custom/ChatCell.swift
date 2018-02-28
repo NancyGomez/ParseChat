@@ -13,6 +13,7 @@ class ChatCell: UITableViewCell {
     
     @IBOutlet weak var usernameTextLabel: UILabel!
     @IBOutlet weak var messageTextLabel: UILabel!
+    @IBOutlet weak var bubbleView: UIView!
     
     let alertController = UIAlertController(title: "Error", message: "Message", preferredStyle: .alert)
     

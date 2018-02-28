@@ -24,6 +24,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.separatorStyle = .none
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -109,6 +111,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.messageTextLabel.text = self.messages[indexPath.row]
         cell.usernameTextLabel.text = self.usernames[indexPath.row]
+        
+        cell.bubbleView.layer.cornerRadius = 16
+        cell.bubbleView.clipsToBounds = true
         
         return cell
         
