@@ -14,6 +14,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     let alertController = UIAlertController(title: "Error", message: "Message", preferredStyle: .alert)
+    var refreshControl: UIRefreshControl!
     
 //    var chatMessages: [ChatMessage] = []
     
@@ -30,6 +31,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = UITableViewAutomaticDimension
         // Provide an estimated row height. Used for calculating scroll indicator
         tableView.estimatedRowHeight = 50
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(ChatViewController.didPullToRefresh(_:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
         
         
         let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in }
@@ -60,6 +65,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
+        getMessages()
+    }
+    
     @objc func getMessages() {
         let query = PFQuery(className: "Message")
         query.includeKey("user")
@@ -74,9 +83,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                     for message in messages{
                         // First check if a message exists
                         if message["text"] != nil {
-//                            print(message["text"])
                             self.messages.append(message["text"] as! String)
-                            
                             // First check if a user exists
                             if message["user"] != nil {
                                 let user = message["user"] as! PFUser
@@ -94,6 +101,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             }
         }
+        self.refreshControl.endRefreshing()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
