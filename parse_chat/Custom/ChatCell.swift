@@ -11,6 +11,7 @@ import UIKit
 class ChatCell: UITableViewCell {
 
     
+    @IBOutlet weak var userAvatarImageView: UIImageView!
     @IBOutlet weak var usernameTextLabel: UILabel!
     @IBOutlet weak var messageTextLabel: UILabel!
     @IBOutlet weak var bubbleView: UIView!

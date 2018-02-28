@@ -7,7 +7,8 @@ target 'parse_chat' do
 
   # Pods for parse_chat
   pod 'Parse'
-  target 'parse_chatTests' do
+  pod 'AlamofireImage'  
+target 'parse_chatTests' do
     inherit! :search_paths
     # Pods for testing
   end

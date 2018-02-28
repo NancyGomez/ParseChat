@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import AlamofireImage
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -109,8 +110,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatCell
         
+        var username = self.usernames[indexPath.row]
+        username = checkUsername(username)
+        let baseURL = "https://api.adorable.io/avatars/40/"
+        let avatarURL = URL(string: baseURL + username)!
+        
         cell.messageTextLabel.text = self.messages[indexPath.row]
         cell.usernameTextLabel.text = self.usernames[indexPath.row]
+        cell.userAvatarImageView.af_setImage(withURL: avatarURL)
         
         cell.bubbleView.layer.cornerRadius = 16
         cell.bubbleView.clipsToBounds = true
@@ -121,6 +128,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func onLogOut(_ sender: Any) {
         print("Log Out Pressed")
         NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
+    }
+    func checkUsername(_ username: String) -> String {
+        let result = String(username.characters.filter { "01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".characters.contains($0) })
+        return result
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

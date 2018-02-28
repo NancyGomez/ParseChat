@@ -157,6 +157,7 @@
                                         <connections>
                                             <outlet property="bubbleView" destination="xAG-hM-fGm" id="BDi-hi-Pqz"/>
                                             <outlet property="messageTextLabel" destination="Uej-9X-ZHM" id="ifg-HB-Uj7"/>
+                                            <outlet property="userAvatarImageView" destination="ncW-IX-l4u" id="c7O-u5-I3H"/>
                                             <outlet property="usernameTextLabel" destination="kJH-ml-Grs" id="JH2-gN-TxD"/>
                                         </connections>
                                     </tableViewCell>
