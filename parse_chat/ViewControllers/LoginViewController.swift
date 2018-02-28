@@ -11,6 +11,7 @@ import Parse
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     let alertController = UIAlertController(title: "Error", message: "Message", preferredStyle: .alert)
@@ -37,23 +38,30 @@ class LoginViewController: UIViewController {
         newUser.password = passwordTextField.text
     
         newUser.signUpInBackground { (success: Bool, error: Error?) in
+            self.activityIndicator.startAnimating()
             if let error = error {
                 self.alertController.message = "Sign up failed: \(error.localizedDescription)"
                 self.present(self.alertController, animated: true) {}
+                self.activityIndicator.stopAnimating()
             } else {
                 print("Yay created a user!")
+                self.activityIndicator.stopAnimating()
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }
     }
     
     @IBAction func onLogIn(_ sender: Any) {
+        self.activityIndicator.startAnimating()
+        
         PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!) { (user: PFUser?, error: Error?) in
             if let error = error {
                 self.alertController.message = "Log in failed: \(error.localizedDescription)"
                 self.present(self.alertController, animated: true) {}
+                self.activityIndicator.stopAnimating()
             } else {
                 print("User logged in successfully")
+                self.activityIndicator.stopAnimating()
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }

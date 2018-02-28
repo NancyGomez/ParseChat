@@ -113,6 +113,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
         
     }
+    @IBAction func onLogOut(_ sender: Any) {
+        print("Log Out Pressed")
+        NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
