@@ -52,7 +52,7 @@ class LoginViewController: UIViewController {
                 self.present(self.alertController, animated: true) {}
             } else {
                 print("Yay created a user!")
-                //self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }
     }
@@ -64,7 +64,7 @@ class LoginViewController: UIViewController {
                 self.present(self.alertController, animated: true) {}
             } else {
                 print("User logged in successfully")
-//                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }
     }
