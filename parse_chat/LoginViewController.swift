@@ -13,11 +13,24 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-   
+    let alertController = UIAlertController(title: "Error", message: "Message", preferredStyle: .alert)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // create a cancel action
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            // handle cancel response here. Doing nothing will dismiss the view.
+        }
+        // add the cancel action to the alertController
+        alertController.addAction(cancelAction)
+        
+        // create an OK action
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            // handle response here.
+        }
+        // add the OK action to the alert controller
+        alertController.addAction(OKAction)
     }
     
     @IBAction func onSignUp(_ sender: Any) {
@@ -26,11 +39,12 @@ class LoginViewController: UIViewController {
         newUser.password = passwordTextField.text
         
         newUser.signUpInBackground { (success: Bool, error: Error?) in
-            if success{
-                print("Yay created a user!")
-//                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            if let error = error {
+                self.alertController.message = "Sign up failed: \(error.localizedDescription)"
+                self.present(self.alertController, animated: true) {}
             } else {
-                print(error?.localizedDescription)
+                print("Yay created a user!")
+                //self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }
     }
@@ -38,7 +52,8 @@ class LoginViewController: UIViewController {
     @IBAction func onLogIn(_ sender: Any) {
         PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!) { (user: PFUser?, error: Error?) in
             if let error = error {
-                print("User log in failed: \(error.localizedDescription)")
+                self.alertController.message = "Log in failed: \(error.localizedDescription)"
+                self.present(self.alertController, animated: true) {}
             } else {
                 print("User logged in successfully")
 //                self.performSegue(withIdentifier: "loginSegue", sender: nil)
