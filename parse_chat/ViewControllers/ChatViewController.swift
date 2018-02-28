@@ -13,20 +13,24 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+//    var chatMessages: [ChatMessage] = []
+    
     var messages: [String] = []
+    var usernames: [String] = []
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         // Auto size row height based on cell autolayout constraints
         tableView.rowHeight = UITableViewAutomaticDimension
         // Provide an estimated row height. Used for calculating scroll indicator
         tableView.estimatedRowHeight = 50
+
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.onTimer), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.getMessages), userInfo: nil, repeats: true)
     }
     
     @IBAction func onSend(_ sender: Any) {
@@ -42,12 +46,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    @objc func onTimer() {
-        print("ONE")
-        getMessages()
-    }
-    
-    func getMessages() {
+    @objc func getMessages() {
         let query = PFQuery(className: "Message")
         query.includeKey("user")
         query.order(byDescending: "createdAt")
@@ -59,9 +58,19 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.messages = []
                     
                     for message in messages{
+                        // First check if a message exists
                         if message["text"] != nil {
                             print(message["text"])
                             self.messages.append(message["text"] as! String)
+                            
+                            // First check if a user exists
+                            if message["user"] != nil {
+                                let user = message["user"] as! PFUser
+                                self.usernames.append(user.username!)
+                            } else {
+                                // No user found, set default username
+                                self.usernames.append("🤖")
+                            }
                         }
                     }
                     self.tableView.reloadData()
@@ -77,6 +86,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatCell
         
         cell.messageTextLabel.text = self.messages[indexPath.row]
+        cell.usernameTextLabel.text = self.usernames[indexPath.row]
         
         return cell
         

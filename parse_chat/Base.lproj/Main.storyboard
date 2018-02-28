@@ -131,6 +131,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="messageTextLabel" destination="Uej-9X-ZHM" id="ifg-HB-Uj7"/>
+                                            <outlet property="usernameTextLabel" destination="kJH-ml-Grs" id="JH2-gN-TxD"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
