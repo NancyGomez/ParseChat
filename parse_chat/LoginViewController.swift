@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class LoginViewController: UIViewController {
 
@@ -20,10 +21,29 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func onSignUp(_ sender: Any) {
+        let newUser = PFUser()
+        newUser.username = usernameTextField.text
+        newUser.password = passwordTextField.text
         
+        newUser.signUpInBackground { (success: Bool, error: Error?) in
+            if success{
+                print("Yay created a user!")
+//                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
     }
     
     @IBAction func onLogIn(_ sender: Any) {
+        PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!) { (user: PFUser?, error: Error?) in
+            if let error = error {
+                print("User log in failed: \(error.localizedDescription)")
+            } else {
+                print("User logged in successfully")
+//                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
