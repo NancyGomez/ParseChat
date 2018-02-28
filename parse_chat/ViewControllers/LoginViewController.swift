@@ -18,18 +18,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // create a cancel action
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-            // handle cancel response here. Doing nothing will dismiss the view.
-        }
-        // add the cancel action to the alertController
-        alertController.addAction(cancelAction)
-        
-        // create an OK action
-        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            // handle response here.
-        }
-        // add the OK action to the alert controller
+        // create an OK action and add to alert
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in }
         alertController.addAction(OKAction)
     }
     

@@ -23,7 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             configuration.server = "https://parsechatcodepath.herokuapp.com/parse"
         }))
         
-        
+        // check for current user
+        if let currentUser = PFUser.current() {
+            print("Welcome back \(currentUser.username!) 😀")
+                
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let chatViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController")
+            window?.rootViewController = chatViewController
+        }
         
         
         return true

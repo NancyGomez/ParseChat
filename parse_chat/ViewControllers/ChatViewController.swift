@@ -13,6 +13,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    let alertController = UIAlertController(title: "Error", message: "Message", preferredStyle: .alert)
+    
 //    var chatMessages: [ChatMessage] = []
     
     var messages: [String] = []
@@ -28,6 +30,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = UITableViewAutomaticDimension
         // Provide an estimated row height. Used for calculating scroll indicator
         tableView.estimatedRowHeight = 50
+        
+        
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in }
+        alertController.addAction(OKAction)
 
         
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.getMessages), userInfo: nil, repeats: true)
@@ -35,13 +41,21 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func onSend(_ sender: Any) {
         let chatMessage = PFObject(className: "Message")
+        let user = PFUser.current()
         chatMessage["text"] = messageTextField.text ?? ""
+        chatMessage["user"] = user
         
+        if (messageTextField.text == "") {
+            self.alertController.message = "Error, empty message."
+            self.present(self.alertController, animated: true) {}
+            return
+        }
         chatMessage.saveInBackground { (success, error) in
             if let error = error {
                 print("Problem saving message: \(error.localizedDescription)")
             } else {
                 print("The message was saved!")
+                self.messageTextField.text = ""
             }
         }
     }
@@ -60,7 +74,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                     for message in messages{
                         // First check if a message exists
                         if message["text"] != nil {
-                            print(message["text"])
+//                            print(message["text"])
                             self.messages.append(message["text"] as! String)
                             
                             // First check if a user exists
