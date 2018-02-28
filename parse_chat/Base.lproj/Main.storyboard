@@ -99,24 +99,33 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatCell" id="WPf-lI-Qfn" customClass="ChatCell" customModule="parse_chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatCell" rowHeight="52" id="WPf-lI-Qfn" customClass="ChatCell" customModule="parse_chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WPf-lI-Qfn" id="jUd-dQ-ALv">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="51.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, this is my first message!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uej-9X-ZHM">
-                                                    <rect key="frame" x="8" y="8" width="327" height="27.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Hello, this is my first message!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uej-9X-ZHM">
+                                                    <rect key="frame" x="8" y="26.5" width="327" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJH-ml-Grs">
+                                                    <rect key="frame" x="8" y="8" width="327" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Uej-9X-ZHM" firstAttribute="top" secondItem="jUd-dQ-ALv" secondAttribute="top" constant="8" id="Bm0-LF-kw1"/>
+                                                <constraint firstItem="Uej-9X-ZHM" firstAttribute="top" secondItem="kJH-ml-Grs" secondAttribute="bottom" constant="4" id="6K1-YA-gAd"/>
+                                                <constraint firstItem="kJH-ml-Grs" firstAttribute="leading" secondItem="jUd-dQ-ALv" secondAttribute="leading" constant="8" id="7Mm-k3-4mT"/>
+                                                <constraint firstItem="kJH-ml-Grs" firstAttribute="top" secondItem="jUd-dQ-ALv" secondAttribute="top" constant="8" id="7Y3-Vs-u4V"/>
                                                 <constraint firstItem="Uej-9X-ZHM" firstAttribute="leading" secondItem="jUd-dQ-ALv" secondAttribute="leading" constant="8" id="ZkS-yF-7rg"/>
                                                 <constraint firstAttribute="trailing" secondItem="Uej-9X-ZHM" secondAttribute="trailing" constant="8" id="cE2-nk-DH4"/>
+                                                <constraint firstAttribute="trailing" secondItem="kJH-ml-Grs" secondAttribute="trailing" constant="8" id="ogY-fg-PAh"/>
                                                 <constraint firstAttribute="bottom" secondItem="Uej-9X-ZHM" secondAttribute="bottom" constant="8" id="rS3-9C-bnl"/>
                                             </constraints>
                                         </tableViewCellContentView>
