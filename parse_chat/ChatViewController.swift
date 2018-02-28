@@ -13,6 +13,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    var messages: [String] = []
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,25 +50,35 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         // fetch data asynchronously
         query.findObjectsInBackground { (messages, error) in
             if let messages = messages{
-                // do something with the array of object returned by the call
-                for message in messages {
-                    // access the object as a dictionary and cast type
-                    print(message)
+                if(messages != nil){
+                    self.messages = []
+                    
+                    for message in messages{
+                        if message["text"] != nil {
+                            print(message["text"])
+                            self.messages.append(message["text"] as! String)
+                        }
+                    }
+                    self.tableView.reloadData()
                 }
-            } else {
-                print(error?.localizedDescription)
+                else{
+                    print("Info:! \(error?.localizedDescription)")
+                }
             }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatCell
+        
+        cell.messageTextLabel.text = self.messages[indexPath.row]
+        
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return messages.count
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
