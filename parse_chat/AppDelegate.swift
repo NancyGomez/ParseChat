@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Contacting server
         Parse.initialize(with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) in
             configuration.applicationId = "CodePath-Parse"
-            configuration.server = "http://45.79.67.127:1337/parse"
+            configuration.server = "https://parsechatcodepath.herokuapp.com/parse"
         }))
         
         

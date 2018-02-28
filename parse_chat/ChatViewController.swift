@@ -18,6 +18,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Auto size row height based on cell autolayout constraints
+        tableView.rowHeight = UITableViewAutomaticDimension
+        // Provide an estimated row height. Used for calculating scroll indicator
+        tableView.estimatedRowHeight = 50
+        
         tableView.delegate = self
         tableView.dataSource = self
         

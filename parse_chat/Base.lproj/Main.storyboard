@@ -106,14 +106,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello, this is my first message!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uej-9X-ZHM">
-                                                    <rect key="frame" x="0.0" y="11" width="343" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, this is my first message!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uej-9X-ZHM">
+                                                    <rect key="frame" x="8" y="8" width="327" height="27.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Uej-9X-ZHM" firstAttribute="top" secondItem="jUd-dQ-ALv" secondAttribute="top" constant="8" id="Bm0-LF-kw1"/>
+                                                <constraint firstItem="Uej-9X-ZHM" firstAttribute="leading" secondItem="jUd-dQ-ALv" secondAttribute="leading" constant="8" id="ZkS-yF-7rg"/>
+                                                <constraint firstAttribute="trailing" secondItem="Uej-9X-ZHM" secondAttribute="trailing" constant="8" id="cE2-nk-DH4"/>
+                                                <constraint firstAttribute="bottom" secondItem="Uej-9X-ZHM" secondAttribute="bottom" constant="8" id="rS3-9C-bnl"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="messageTextLabel" destination="Uej-9X-ZHM" id="ifg-HB-Uj7"/>
