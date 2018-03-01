@@ -37,7 +37,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.gyazo.com/6d28abe2a12d5ffc791a21b15fe648df.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
 ## Notes
