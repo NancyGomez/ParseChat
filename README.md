@@ -41,12 +41,12 @@ Here's a walkthrough of implemented user stories:
 
 
 ## Notes
+Constraints. Legitimately considered not doing the optional simply because the constraints were not nice to me. Eventually got help and it sort of made sense but still... I hated every second I spent on the UI.
 
-Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [2018] [Nancy]
+    Copyright [2018] [Nancy and Carlos]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
